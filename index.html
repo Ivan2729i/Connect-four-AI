@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Conecta 4 | Un Jugador</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuente Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+
+  <div class="app-background">
+    <div class="bg-gradient-main"></div>
+    <div class="bg-blur bg-blur-blue"></div>
+    <div class="bg-blur bg-blur-yellow"></div>
+    <div class="bg-blur bg-blur-red"></div>
+  </div>
+
+  <main class="min-h-screen px-4 py-8 flex items-center justify-center">
+    <div class="w-full max-w-6xl">
+
+      <header class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-sm text-blue-100 mb-4">
+          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+          Modo un jugador contra bot
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+          <span class="text-white">Conecta</span>
+          <span class="text-yellow-300">4</span>
+        </h1>
+
+        <p class="mt-3 text-slate-300 text-sm sm:text-base">
+          Alinea cuatro fichas antes que el bot.
+        </p>
+      </header>
+
+      <section id="homeScreen">
+        <div class="max-w-xl mx-auto bg-white/10 border border-white/10 backdrop-blur-xl rounded-3xl shadow-glow p-6 sm:p-8">
+
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-white mb-2">Nueva partida</h2>
+            <p class="text-slate-300 text-sm">
+              Ingresa tu nombre para registrar tus partidas.
+            </p>
+          </div>
+
+          <div class="space-y-5">
+            <div>
+              <label for="playerName" class="block text-sm font-semibold text-slate-200 mb-2">
+                Nombre del jugador
+              </label>
+
+              <input
+                type="text"
+                id="playerName"
+                placeholder="Escribe tu nombre"
+                autocomplete="off"
+                class="w-full px-4 py-3 rounded-2xl bg-slate-950/70 border border-white/10 text-white placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 transition"
+              >
+            </div>
+
+            <div>
+              <label for="difficultySelect" class="block text-sm font-semibold text-slate-200 mb-2">
+                Dificultad
+              </label>
+
+              <select
+                id="difficultySelect"
+                class="w-full px-4 py-3 rounded-2xl bg-slate-950/70 border border-white/10 text-white outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+              >
+                <option value="easy">Fácil</option>
+                <option value="medium" selected>Medio</option>
+                <option value="extreme">Extremo</option>
+              </select>
+
+              <p class="mt-2 text-xs text-slate-400">
+                Elige con sabiduría, el bot no te lo dejará fácil.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <button
+                id="startBtn"
+                type="button"
+                class="btn-game btn-yellow px-5 py-3 rounded-2xl bg-yellow-300 text-slate-950 font-bold hover:bg-yellow-200 active:scale-[0.98] transition shadow-lg shadow-yellow-400/20"
+              >
+                Iniciar
+              </button>
+
+              <button
+                id="helpBtn"
+                type="button"
+                class="btn-game btn-blue px-5 py-3 rounded-2xl bg-blue-500 text-white font-bold hover:bg-blue-400 active:scale-[0.98] transition shadow-lg shadow-blue-500/20"
+              >
+                Ayuda
+              </button>
+
+              <button
+                id="recordBtn"
+                type="button"
+                class="btn-game btn-ghost px-5 py-3 rounded-2xl bg-white/10 border border-white/10 text-white font-bold hover:bg-white/15 active:scale-[0.98] transition"
+              >
+                Récords
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gameSection" class="mt-6">
+        <div id="gameInfo" class="hidden mb-5">
+          <div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-white/10 border border-white/10 backdrop-blur-xl px-5 py-4">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-1">
+                Jugador actual
+              </p>
+              <h4 id="turnDisplay" class="text-xl font-bold text-yellow-300">
+                Turno:
+              </h4>
+            </div>
+
+            <div class="rounded-2xl bg-white/10 border border-white/10 backdrop-blur-xl px-5 py-4">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-1">
+                Contador
+              </p>
+              <h4 id="moveCountDisplay" class="text-xl font-bold text-blue-300">
+                Movimientos: 0
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <div id="canvasContainer" class="hidden p-3 sm:p-5 rounded-3xl bg-white/10 border border-white/10 backdrop-blur-xl shadow-glow">
+            <canvas
+              id="gameCanvas"
+              width="560"
+              height="480"
+              class="rounded-2xl shadow-2xl"
+            ></canvas>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="helpModal" class="modal hidden">
+    <div class="modal-overlay" data-close-modal="helpModal"></div>
+
+    <div class="modal-card">
+      <div class="flex items-start justify-between gap-4 mb-5">
+        <div>
+          <h2 class="text-2xl font-extrabold text-white">Instrucciones</h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Conecta 4, versión jugador contra bot.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          data-close-modal="helpModal"
+          aria-label="Cerrar"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
+        <p>
+          El objetivo del juego es alinear cuatro fichas consecutivas en vertical, horizontal o diagonal.
+        </p>
+
+        <p>
+          Haz clic sobre la columna donde quieres dejar caer tu ficha. Después de tu movimiento, el bot hará el suyo.
+        </p>
+
+        <p>
+          La partida termina cuando tú o el bot conectan 4 fichas, o cuando el tablero se llena y queda en empate.
+        </p>
+
+        <p class="text-yellow-300 font-semibold">
+          Consejo: controla el centro del tablero.
+        </p>
+      </div>
+
+      <div class="mt-6">
+        <button
+          type="button"
+          class="btn-game btn-blue w-full px-5 py-3 rounded-2xl bg-blue-500 hover:bg-blue-400 text-white font-bold transition"
+          data-close-modal="helpModal"
+        >
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="recordModal" class="modal hidden">
+    <div class="modal-overlay" data-close-modal="recordModal"></div>
+
+    <div class="modal-card modal-card-lg">
+      <div class="flex items-start justify-between gap-4 mb-5">
+        <div>
+          <h2 class="text-2xl font-extrabold text-white">Récords</h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Partidas guardadas en este navegador.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          data-close-modal="recordModal"
+          aria-label="Cerrar"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="max-h-[420px] overflow-y-auto pr-1">
+        <ul id="recordList" class="space-y-3"></ul>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button
+          type="button"
+          class="btn-game btn-ghost px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 text-white font-bold transition"
+          data-close-modal="recordModal"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/bot.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
