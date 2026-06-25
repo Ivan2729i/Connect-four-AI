@@ -104,15 +104,9 @@ Open with Live Server
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻👤 Contacto
 
-Desarrollado por **Iván**.
+Desarrollado por **Ivan Paz Valladares**.
 
-Repositorio:
-[Connect Four AI](https://github.com/Ivan2729i/Connect-four-AI)
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ivan-paz-valladares-b8886a343)
 ---
-
-## 📄 Licencia
-
-Este proyecto puede usarse con fines educativos y de aprendizaje.
